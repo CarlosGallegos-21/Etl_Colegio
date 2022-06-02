@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8d7adb9-da5d-453c-97d8-a46c1ac8a2ca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="129"/>
+	<subDataset name="dataSetDatamart" uuid="0b249cff-576b-4a4d-8e65-6ac7af0b1b60">
+		<parameter name="Fecha" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     dim_curso.`nivel` AS Curso,
+     dim_curso.`paralelo` AS Paralelo,
+     hec_desercioncurso.`suma_desercion` AS Suma
+FROM
+     `dim_curso` dim_curso INNER JOIN `hec_desercioncurso` hec_desercioncurso ON dim_curso.`id` = hec_desercioncurso.`id_curso`
+     INNER JOIN `dim_motivo` dim_motivo ON hec_desercioncurso.`id_motivo` = dim_motivo.`id`
+     INNER JOIN `dim_periodo` dim_periodo ON hec_desercioncurso.`id_periodo` = dim_periodo.`id`
+     INNER JOIN `dim_profesor` dim_profesor ON hec_desercioncurso.`id_profesor` = dim_profesor.`id`
+WHERE
+     dim_periodo.nombre_periodo = $P{Fecha}]]>
+		</queryString>
+		<field name="Curso" class="java.lang.String"/>
+		<field name="Paralelo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Suma" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="Fecha" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Carlos\\Documents\\NetBeansProjects\\colegio\\src\\reporte\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     dim_periodo.`nombre_periodo` AS Periodo,
+     dim_curso.`nivel` AS Curso,
+     dim_curso.`paralelo` AS Paralelo,
+     hec_desercioncurso.`suma_desercion` AS Suma
+FROM
+     `dim_curso` dim_curso INNER JOIN `hec_desercioncurso` hec_desercioncurso ON dim_curso.`id` = hec_desercioncurso.`id_curso`
+     INNER JOIN `dim_motivo` dim_motivo ON hec_desercioncurso.`id_motivo` = dim_motivo.`id`
+     INNER JOIN `dim_periodo` dim_periodo ON hec_desercioncurso.`id_periodo` = dim_periodo.`id`
+     INNER JOIN `dim_profesor` dim_profesor ON hec_desercioncurso.`id_profesor` = dim_profesor.`id`
+WHERE
+     dim_periodo.nombre_periodo = $P{Fecha}]]>
+	</queryString>
+	<field name="Periodo" class="java.lang.String"/>
+	<field name="Curso" class="java.lang.String"/>
+	<field name="Paralelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Suma" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="154" height="79" uuid="b22b6529-d208-4d3f-80ae-a633534dfc69"/>
+				<imageExpression><![CDATA["C:\\Users\\Carlos\\Documents\\NetBeansProjects\\colegio\\src\\img\\descarga.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="81" y="0" width="414" height="28" uuid="72fb88e2-c9db-43c7-a3c3-e302627966cb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDAD EDUCATIVA "RUBEN DARIO"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="28" width="414" height="28" uuid="02d0b50e-79f7-4125-a323-9f30d2dc9026"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE DESERCION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="516" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="20" uuid="d5537ad7-475d-45bd-b8d5-df9b142bb010"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="100" height="20" uuid="19a71dca-a199-4117-91e4-c59022795a10"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Periodo}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="211" y="0" width="344" height="61" uuid="70e37c42-e993-4872-bb44-463865b6ad3c"/>
+				<subreportParameter name="fecha_sub">
+					<subreportParameterExpression><![CDATA[$P{Fecha}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "informe_sub.jasper"]]></subreportExpression>
+			</subreport>
+			<pie3DChart>
+				<chart>
+					<reportElement x="0" y="73" width="555" height="281" uuid="617e7d57-0e32-446f-84d1-3741e7d69d0f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="dataSetDatamart" uuid="6a8dbd92-ecea-4a82-a575-e2ff5293d35d">
+							<datasetParameter name="Fecha">
+								<datasetParameterExpression><![CDATA[$P{Fecha}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{Curso}+" "+$F{Paralelo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{Suma}]]></valueExpression>
+					<labelExpression><![CDATA[""+$F{Suma}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+			<staticText>
+				<reportElement x="81" y="496" width="414" height="20" forecolor="#999999" uuid="9ea99358-63fb-41ab-81c8-59fcd4263209"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[MANTA - MANABÍ - ECUADOR © Copyright 2022 por Carlos Gallegos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>
