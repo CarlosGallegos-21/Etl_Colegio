@@ -6,7 +6,6 @@ DROP SCHEMA IF EXISTS colegio ;
 -- -----------------------------------------------------
 -- Schema colegio
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS colegio DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE colegio ;
 
 -- -----------------------------------------------------
