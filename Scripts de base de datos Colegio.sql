@@ -2,12 +2,10 @@
 -- Schema colegio
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS colegio ;
-
 -- -----------------------------------------------------
 -- Schema colegio
 -- -----------------------------------------------------
 USE colegio ;
-
 -- -----------------------------------------------------
 -- Table alumno
 -- -----------------------------------------------------
@@ -116,12 +114,12 @@ CREATE TABLE IF NOT EXISTS alumno_materia (
   id_profesor INT NOT NULL,
   calificacion VARCHAR(50) NOT NULL,
   PRIMARY KEY (id),
-  INDEX id_alumno (id_alumno ASC) VISIBLE,
-  INDEX id_materia (id_materia ASC) VISIBLE,
-  INDEX id_periodo (id_periodo ASC) VISIBLE,
-  INDEX id_curso_idx (id_curso ASC) VISIBLE,
-  INDEX id_motivo_idx (id_motivo ASC) VISIBLE,
-  INDEX id_profesor_idx (id_profesor ASC) VISIBLE,
+  INDEX id_alumno (id_alumno ASC),
+  INDEX id_materia (id_materia ASC),
+  INDEX id_periodo (id_periodo ASC),
+  INDEX id_curso_idx (id_curso ASC),
+  INDEX id_motivo_idx (id_motivo ASC),
+  INDEX id_profesor_idx (id_profesor ASC),
   CONSTRAINT id_alumno
     FOREIGN KEY (id_alumno)
     REFERENCES alumno (id),
@@ -164,9 +162,9 @@ CREATE TABLE IF NOT EXISTS aula (
   nombre_aula VARCHAR(50) NOT NULL,
   capacidad VARCHAR(50) NOT NULL,
   PRIMARY KEY (id),
-  INDEX id_materia_idx (id_materia ASC) VISIBLE,
-  INDEX id_profesor_idx (id_profesor ASC) VISIBLE,
-  INDEX id_periodo_idx (id_periodo ASC) VISIBLE,
+  INDEX id_materia_idx (id_materia ASC),
+  INDEX id_profesor_idx (id_profesor ASC),
+  INDEX id_periodo_idx (id_periodo ASC),
   CONSTRAINT id_materia_idx
     FOREIGN KEY (id_materia)
     REFERENCES materia (id),
@@ -207,8 +205,8 @@ CREATE TABLE IF NOT EXISTS horario (
   horaInicio TIME NOT NULL,
   horaFin TIME NOT NULL,
   PRIMARY KEY (id),
-  INDEX id_dia_idx (id_dia ASC) VISIBLE,
-  INDEX id_clase_idx (id_clase ASC) VISIBLE,
+  INDEX id_dia_idx (id_dia ASC),
+  INDEX id_clase_idx (id_clase ASC),
   CONSTRAINT id_clase_idx
     FOREIGN KEY (id_clase)
     REFERENCES aula (id),
