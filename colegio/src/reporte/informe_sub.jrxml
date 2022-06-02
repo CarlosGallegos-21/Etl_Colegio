@@ -17,7 +17,7 @@ WHERE
 	</queryString>
 	<field name="Total" class="java.math.BigDecimal"/>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<staticText>
 				<reportElement x="-20" y="-20" width="100" height="20" uuid="6e4df617-2720-410c-8fa6-5ebd31832998"/>
 				<textElement>
